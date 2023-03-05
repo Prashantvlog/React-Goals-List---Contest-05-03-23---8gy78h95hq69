@@ -1,20 +1,13 @@
-import React, { useState } from 'react'
-import '../styles/App.css';
-import GoalForm from './GoalForm';
-import ListOfGoals from './ListOfGoals';
+import React from "react";
 
-const App = () => {
+const ListOfGoals = ({ goals }) => (
+  <ul>
+    {goals.map(({ goal, by }, i) => (
+      <li key={i}>
+        My goal is to {goal}, by {by}.
+      </li>
+    ))}
+  </ul>
+);
 
-  const [allGoals, setAllGoals] = useState([]);
-
-  return (
-    <div id="main">
-      <GoalForm />
-      <ListOfGoals />
-    </div>
-  )
-  
-}
-
-
-export default App;
+export default ListOfGoals;
