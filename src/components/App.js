@@ -1,41 +1,21 @@
 import React, { useState } from "react";
+import "../styles/App.css";
+import GoalForm from "./GoalForm";
+import ListOfGoals from "./ListOfGoals";
 
-const GoalForm = ({ addGoal }) => {
-  const [formData, setFormData] = useState({
-    goal: "",
-    by: ""
-  });
+const App = () => {
+  const [allGoals, setAllGoals] = useState([]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addGoal(formData);
-    setFormData({ goal: "", by: "" });
+  const addGoal = (newGoal) => {
+    setAllGoals([...allGoals, newGoal]);
   };
 
   return (
-    <>
-      <h1>My Goals</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="goal"
-          placeholder="Goal..."
-          value={formData.goal}
-          onChange={(e) =>
-            setFormData({ ...formData, goal: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          name="by"
-          placeholder="By..."
-          value={formData.by}
-          onChange={(e) => setFormData({ ...formData, by: e.target.value })}
-        />
-        <button>Add</button>
-      </form>
-    </>
+    <div id="main">
+      <GoalForm addGoal={addGoal} />
+      <ListOfGoals goals={allGoals} />
+    </div>
   );
 };
 
-export default GoalForm;
+export default App;
